@@ -1,0 +1,25 @@
+{
+  "name": "madlines/common-security-resolver",
+  "type": "library",
+  "description": "Simple voters-based access resolver",
+  "keywords": [],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Aleksander Ciesiolkiewicz",
+      "email": "a.ciesiolkiewicz@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.2.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Madlines\\Common\\SecurityResolver\\": "src",
+      "Madlines\\Common\\SecurityResolver\\Tests\\": "tests"
+    }
+  }
+}
