@@ -1,5 +1,7 @@
 # Madlines Common Security Accessor
 
+[![Build Status](https://travis-ci.org/Madlines/Common-Security-Resolver.svg?branch=master)](https://travis-ci.org/Madlines/Common-Security-Resolver)
+
 This is a very simple voters-bases security resolver.
 It gets a list of voters which work in a middleware fashion
 and it exposes a `isGranted` method which can ask voters if
