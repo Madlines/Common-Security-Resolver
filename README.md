@@ -1,4 +1,4 @@
-# Madlines Common Security Accessor
+# Madlines Common Security Resolver
 
 [![Build Status](https://travis-ci.org/Madlines/Common-Security-Resolver.svg?branch=master)](https://travis-ci.org/Madlines/Common-Security-Resolver)
 
