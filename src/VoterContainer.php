@@ -35,7 +35,7 @@ class VoterContainer
     }
 
     /**
-     * @param object $user
+     * @param mixed $user
      * @param mixed $task
      * @return bool|null
      */
@@ -43,10 +43,18 @@ class VoterContainer
     {
         $result = $this->voter->{$this->method}($user, $task);
 
-        if (is_null($result)) {
+        if (is_null($result) || 0 === $result) {
             return null;
         }
 
-        return (bool) $result;
+        if (false === $result || -1 === $result) {
+            return false;
+        }
+
+        if (true === $result || 1 === $result) {
+            return true;
+        }
+
+        throw new \RuntimeException('Voter has to return one of the following values: true, false, bool, 1, -1 or 0.');
     }
 }

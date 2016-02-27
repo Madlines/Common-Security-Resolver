@@ -2,15 +2,10 @@
 
 namespace Madlines\Common\SecurityResolver\Tests;
 
-class VoterMock
+class NotAgreeingBooleanVoterMock
 {
     public function isGranted($user, $task)
     {
-        return true;
-    }
-
-    private function foo($user, $task)
-    {
-        return null;
+        return false;
     }
 }

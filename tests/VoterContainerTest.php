@@ -27,15 +27,56 @@ class VoterContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testBuildWithPrivateIsGrantedMethod()
     {
-        $voter = new VoterMock();
+        $voter = new BooleanVoterMock();
         new VoterContainer($voter, 'foo');
     }
 
     public function testIsGranted()
     {
-        $voter = new VoterMock();
+        $voter = new BooleanVoterMock();
         $container = new VoterContainer($voter, 'isGranted');
 
         $this->assertTrue($container->isGranted(new \StdClass(), new \StdClass()));
+    }
+
+    public function testHandlingAVotersReturningIntegerValues()
+    {
+        $voter = new IntegerVoterMock();
+        $container = new VoterContainer($voter, 'isGranted');
+
+        $this->assertTrue($container->isGranted(new \StdClass(), new \StdClass()));
+
+        $voter = new IgnorantIntegerVoterMock();
+        $container = new VoterContainer($voter, 'isGranted');
+
+        $this->assertNull($container->isGranted(new \StdClass(), new \StdClass()));
+
+        $voter = new NotAgreeingIntegerVoterMock();
+        $container = new VoterContainer($voter, 'isGranted');
+
+        $this->assertFalse($container->isGranted(new \StdClass(), new \StdClass()));
+    }
+
+    public function improperReturnValues()
+    {
+        return [
+            [new \StdClass],
+            [2],
+            [-2],
+            [[]],
+        ];
+    }
+
+    /**
+     * @dataProvider improperReturnValues
+     * @expectedException \RuntimeException
+     */
+    public function testVoterWhichReturnsValuesFromOutsideAllowedScope($value)
+    {
+        $voter = $this->getMock(\StdClass::class, ['isGranted']);
+        $voter->method('isGranted')->willReturn($value);
+
+        $container = new VoterContainer($voter, 'isGranted');
+        $container->isGranted(new \StdClass(), new \StdClass());
     }
 }
