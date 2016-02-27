@@ -27,13 +27,16 @@ class PostEditVoter
         // if (!($task instanceof PostEditTask)) {
         if ($task !== 'post_edit') {
             return null; // null means 'ignore'
+            // returning integer 0 means the same
         }
 
         if ($user->hasRole('ROLE_ADMIN')) {
             return true; // agree
+            // returning integer 1 means the same
         }
 
         return false; // disagree
+        // returning integer -1 means the same
     }
 }
 ```

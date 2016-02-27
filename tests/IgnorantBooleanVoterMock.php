@@ -2,7 +2,7 @@
 
 namespace Madlines\Common\SecurityResolver\Tests;
 
-class IgnorantVoterMock
+class IgnorantBooleanVoterMock
 {
     public function isGranted($user, $task)
     {
